@@ -51,9 +51,13 @@ dependencies {
     //navegacion
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlin.serialization.json)
+    implementation(libs.kotlinx.serialization.json)
 
     //room
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.androidx.foundation.layout.android)
     annotationProcessor(libs.androidx.room.compiler)
     ksp(libs.androidx.room.compiler)
     //  optional - Kotlin Extensions and Coroutines support for Room
