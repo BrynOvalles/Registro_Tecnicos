@@ -68,6 +68,7 @@ import java.text.NumberFormat
                     Text(text = "Nombre", modifier = Modifier.weight(1f), color = Color.Cyan)
                     Text(text = "Sueldo", modifier = Modifier.weight(1f), color = Color.Cyan)
                 }
+                HorizontalDivider()
                 LazyColumn(
                     modifier = Modifier.fillMaxWidth()
                 ){

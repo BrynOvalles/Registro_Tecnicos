@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
@@ -56,13 +56,13 @@ import kotlinx.coroutines.launch
                             value = nombre,
                             onValueChange = { nombre = it },
                             maxLines = 1,
-
                             modifier = Modifier.fillMaxWidth()
                         )
                         OutlinedTextField(
                             label = { Text("Sueldo") },
                             value = sueldo,
                             onValueChange = { sueldo = it },
+                            maxLines = 1,
                             modifier = Modifier.fillMaxWidth()
                         )
                         Spacer(modifier = Modifier.padding(2.dp))
@@ -80,7 +80,7 @@ import kotlinx.coroutines.launch
                                 }
                             ) {
                                 Icon(
-                                    imageVector = Icons.Default.Add,
+                                    imageVector = Icons.Default.Refresh,
                                     contentDescription = "new button"
                                 )
                                 Text("Nuevo")
@@ -115,16 +115,6 @@ import kotlinx.coroutines.launch
                         }
                     }
                 }
-
-//                val lifecycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
-//                val tecnicosList by tecnicoDb.tecnicoDao().getAll()
-//                    .collectAsStateWithLifecycle(
-//                        initialValue = emptyList(),
-//                        lifecycleOwner = lifecycleOwner,
-//                        minActiveState = Lifecycle.State.STARTED
-//                    )
-//                TecnicosListScreen(tecnicosList)
-//
             }
         }
     }
