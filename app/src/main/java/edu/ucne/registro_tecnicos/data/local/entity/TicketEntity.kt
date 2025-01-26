@@ -8,7 +8,7 @@ import java.util.Date
     data class TicketEntity(
         @PrimaryKey
         val ticketId: Int? = null,
-        val fecha: Date,
+        val fecha: Date? =null,
         val prioridadId: Int? = null,
         val cliente: String = "",
         val asunto: String = "",

@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey
         @PrimaryKey
         val tecnicosId: Int? = null,
         val nombre: String = "",
-        val sueldo: Int = 0
+        val sueldo: String = ""
 )
