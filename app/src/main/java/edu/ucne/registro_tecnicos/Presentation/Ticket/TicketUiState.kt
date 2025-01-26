@@ -11,6 +11,8 @@ data class TicketUiState(
     val asunto: String = "",
     val descripcion: String = "",
     val tecnicoId: Int? = null,
+    val mensaje: String = "",
+    val mensajeId: Int? = null,
     val errorMessage: String? = null,
     val tickets: List<TicketEntity> = emptyList()
 )
