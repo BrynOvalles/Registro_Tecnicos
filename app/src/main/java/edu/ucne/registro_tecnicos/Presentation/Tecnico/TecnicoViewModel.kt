@@ -100,5 +100,5 @@ class TecnicoViewModel @Inject constructor(
 fun TecnicoUiState.toEntity() = TecnicoEntity(
     tecnicosId = this.tecnicoId,
     nombre = this.nombre,
-    sueldo = this.sueldo.toString(),
+    sueldo = this.sueldo.toString()
 )

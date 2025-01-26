@@ -4,6 +4,7 @@ import android.text.BoringLayout
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import edu.ucne.registro_tecnicos.Presentation.Tecnico.toEntity
 import edu.ucne.registro_tecnicos.data.local.entity.TecnicoEntity
 import edu.ucne.registro_tecnicos.data.local.entity.TicketEntity
 import edu.ucne.registro_tecnicos.data.repository.TecnicoRepository
@@ -27,6 +28,9 @@ class TicketViewModel @Inject constructor(
 
     private val _tecnicosList = MutableStateFlow<List<TecnicoEntity>>(emptyList())
     val tecnicosList = _tecnicosList.asStateFlow()
+
+    private val _mensajes = MutableStateFlow<Map<Int, MutableList<String>>>(mutableMapOf())
+    val mensajes = _mensajes.asStateFlow()
 
     init {
         getTickets()
@@ -138,6 +142,22 @@ class TicketViewModel @Inject constructor(
             }
         }
     }
+    fun getMensajes(ticketId: Int): List<String> {
+        return _mensajes.value[ticketId] ?: emptyList()
+    }
+    fun addMensaje(ticketId: Int, mensaje: String) {
+        viewModelScope.launch {
+            val updatedMensajes = _mensajes.value.toMutableMap()
+            val ticketMensajes = updatedMensajes[ticketId] ?: mutableListOf()
+            ticketMensajes.add(mensaje)
+            updatedMensajes[ticketId] = ticketMensajes
+            _mensajes.value = updatedMensajes
+        }
+    }
+    fun getTecnicoNombre(tecnicoId: Int): String {
+        return _tecnicosList.value.find { it.tecnicosId == tecnicoId }?.nombre ?: "Técnico"
+    }
+
     fun find(ticketId: Int) {
         viewModelScope.launch {
             if (ticketId > 0) {
@@ -151,7 +171,9 @@ class TicketViewModel @Inject constructor(
                             asunto = ticket.asunto,
                             descripcion = ticket.descripcion,
                             prioridadId = ticket.prioridadId,
-                            ticketId = ticket.ticketId
+                            ticketId = ticket.ticketId,
+                            mensaje = ticket.mensaje,
+                            mensajeId = ticket.mensajeId
                         )
                     }
                 }
@@ -167,5 +189,7 @@ fun TicketUiState.toEntity() = TicketEntity(
     cliente = this.cliente,
     asunto = this.asunto,
     descripcion = this.descripcion,
-    tecnicoId = this.tecnicoId
+    tecnicoId = this.tecnicoId,
+    mensaje = this.mensaje,
+    mensajeId = this.mensajeId
 )
