@@ -10,7 +10,7 @@ import edu.ucne.registro_tecnicos.data.local.entity.TicketEntity
 
 @Database(
         entities = [TecnicoEntity::class, TicketEntity::class],
-        version = 3,
+        version = 4,
         exportSchema = false
     )
 @TypeConverters(Converters::class)
