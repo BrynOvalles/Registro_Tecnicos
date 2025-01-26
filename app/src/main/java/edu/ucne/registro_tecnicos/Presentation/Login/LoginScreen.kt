@@ -1,4 +1,4 @@
-package edu.ucne.registro_tecnicos.Presentation.Tecnico
+package edu.ucne.registro_tecnicos.Presentation.Login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

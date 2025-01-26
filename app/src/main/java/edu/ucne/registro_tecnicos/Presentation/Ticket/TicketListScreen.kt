@@ -1,4 +1,4 @@
-package edu.ucne.registro_tecnicos.Presentation.Tecnico
+package edu.ucne.registro_tecnicos.Presentation.Ticket
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -22,29 +22,46 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import edu.ucne.registro_tecnicos.data.local.entity.TicketEntity
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TicketsListScreen(
-    ticketsList: List<TicketEntity>,
+    viewModel: TicketViewModel = hiltViewModel(),
+    createTickets: () -> Unit,
+    goTickets: (Int) -> Unit,
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    TicketsListBodyScreen(
+        uiState,
+        createTickets,
+        goTickets
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TicketsListBodyScreen(
+    uiState: TicketUiState,
     createTickets: () -> Unit,
     goTickets: (Int) -> Unit
-    ) {
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             CenterAlignedTopAppBar(
                 title= {
                     Text("Listado de Ticket",
-                     color = Color.Cyan)
+                        color = Color.Cyan)
                 }
             )
         },
@@ -54,19 +71,19 @@ fun TicketsListScreen(
             }
         }
     ) { innerPadding ->
-    Column (
-        modifier = Modifier.fillMaxSize().padding(innerPadding)
-    ) {
-        Spacer (modifier = Modifier.height(42.dp))
-        Cabecera()
-        LazyColumn(
-            modifier = Modifier.fillMaxWidth()
+        Column (
+            modifier = Modifier.fillMaxSize().padding(innerPadding)
         ) {
-            items(ticketsList) {
-                TicketRow(it, goTickets)
+            Spacer (modifier = Modifier.height(42.dp))
+            Cabecera()
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                items(uiState.tickets) {
+                    TicketRow(it, goTickets)
+                }
             }
         }
-    }
     }
 }
 
@@ -89,12 +106,12 @@ private fun Cabecera() {
             text = "Fecha",
             textAlign = TextAlign.Start
         )
-        Text(
-            modifier = Modifier.weight(0.2f),
-            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.ExtraLight),
-            text = "Prioridad",
-            textAlign = TextAlign.Start
-        )
+//        Text(
+//            modifier = Modifier.weight(0.2f),
+//            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.ExtraLight),
+//            text = "Prioridad",
+//            textAlign = TextAlign.Start
+//        )
         Text(
             modifier = Modifier.weight(0.2f),
             style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.ExtraLight),
@@ -113,12 +130,12 @@ private fun Cabecera() {
             text = "Descripcion",
             textAlign = TextAlign.Start
         )
-        Text(
-            modifier = Modifier.weight(0.2f),
-            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.ExtraLight),
-            text = "Tecnico",
-            textAlign = TextAlign.Start
-        )
+//        Text(
+//            modifier = Modifier.weight(0.2f),
+//            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.ExtraLight),
+//            text = "Tecnico",
+//            textAlign = TextAlign.Start
+//        )
     }
     HorizontalDivider()
 }
@@ -144,10 +161,10 @@ fun TicketRow(
             modifier = Modifier.weight(1f),
             text = fechaFormateada
         )
-        Text(
-            modifier = Modifier.weight(1f),
-            text = ticket.prioridadId.toString()
-        )
+//        Text(
+//            modifier = Modifier.weight(1f),
+//            text = ticket.prioridadId.toString()
+//        )
         Text(
             modifier = Modifier.weight(1f),
             text = ticket.cliente
@@ -160,10 +177,10 @@ fun TicketRow(
             modifier = Modifier.weight(1f),
             text = ticket.descripcion
         )
-        Text(
-            modifier = Modifier.weight(1f),
-            text = ticket.tecnicoId.toString()
-        )
+//        Text(
+//            modifier = Modifier.weight(1f),
+//            text = ticket.tecnicoId.toString()
+//        )
 
     }
     HorizontalDivider()
