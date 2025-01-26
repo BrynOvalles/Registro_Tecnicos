@@ -13,5 +13,7 @@ import java.util.Date
         val cliente: String = "",
         val asunto: String = "",
         val descripcion: String = "",
-        val tecnicoId: Int? = null
+        val tecnicoId: Int? = null,
+        val mensaje: String = "",
+        val mensajeId: Int? = null,
 )
