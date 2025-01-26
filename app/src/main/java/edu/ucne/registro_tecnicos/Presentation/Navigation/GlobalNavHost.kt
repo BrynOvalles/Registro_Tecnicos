@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import edu.ucne.registro_tecnicos.Presentation.Login.LoginScreen
+import edu.ucne.registro_tecnicos.Presentation.Login.MensajeScreen
 import edu.ucne.registro_tecnicos.Presentation.Tecnico.TecnicosListScreen
 import edu.ucne.registro_tecnicos.Presentation.Tecnico.TecnicosScreen
 import edu.ucne.registro_tecnicos.Presentation.Ticket.TicketsListScreen
@@ -55,7 +56,10 @@ fun GlobalNavHost(
                 goTicketsList = {
                     navHostController.navigateUp()
                 },
-                ticketId = ticketId
+                ticketId = ticketId,
+                createMensajes = {
+                    navHostController.navigate(Screen.Mensajes(0,ticketId))
+                }
             )
     }
         composable<Screen.Login> {
@@ -66,6 +70,19 @@ fun GlobalNavHost(
                 goTicketsList = {
                     navHostController.navigate(Screen.TicketsList)
                 }
+            )
+        }
+
+        composable<Screen.Mensajes> {
+            MensajeScreen(
+                createMensajes = {
+                    navHostController.navigate(Screen.Mensajes(0,0))
+                },
+                goTicket = {
+                    navHostController.navigateUp()
+                },
+                tecnicoId = it.toRoute<Screen.Mensajes>().tecnicoId,
+                ticketId = it.toRoute<Screen.Mensajes>().ticketId
             )
         }
 }
