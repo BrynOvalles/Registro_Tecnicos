@@ -36,6 +36,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot.Companion.observe
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -56,13 +57,15 @@ fun TicketsScreen(
     viewModel: TicketViewModel = hiltViewModel(),
     goTicketsList: () -> Unit,
     ticketId: Int,
+    createMensajes: () -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     TicketsBodyScreen(
         ticketId,
         viewModel,
         uiState.value,
-        goTicketsList
+        goTicketsList,
+        createMensajes
     )
 }
 
@@ -73,6 +76,7 @@ fun TicketsBodyScreen(
     viewModel: TicketViewModel,
     uiState: TicketUiState,
     goTicketsList: () -> Unit,
+    createMensajes: () -> Unit
 ) {
     var errorMessage by remember { mutableStateOf("") }
     var expandPrioridad by remember { mutableStateOf(false) }
@@ -278,6 +282,18 @@ fun TicketsBodyScreen(
                             Text(text = if (ticketId > 0) "Editar" else "Guardar")
                         }
                     }
+                }
+            }
+            Spacer(modifier = Modifier.weight(1f))
+
+            if (ticketId > 0){
+                OutlinedButton(
+                    onClick = {
+                        createMensajes()
+                    },
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                ) {
+                    Text(text = "Responder")
                 }
             }
         }
