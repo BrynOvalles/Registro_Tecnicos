@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,6 +29,7 @@ import androidx.compose.ui.Modifier
 fun LoginScreen(
     goTecnicosList: () -> Unit,
     goTicketsList: () -> Unit,
+    goPrioridadList: () -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -45,7 +47,7 @@ fun LoginScreen(
                 .padding(innerpadding)
         ) {
             Row (
-                modifier = Modifier.fillMaxWidth().weight(1f),
+                modifier = Modifier.fillMaxWidth().weight(0.5f),
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -68,6 +70,21 @@ fun LoginScreen(
                     )
                     Spacer(Modifier.size(ButtonDefaults.IconSpacing))
                     Text("Tickets")
+                }
+            }
+            Row (
+                modifier = Modifier.fillMaxWidth().weight(2f),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                OutlinedButton(
+                onClick = { goPrioridadList() }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = "Prioridad"
+                )
+                Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                Text("Prioriades")
                 }
             }
         }

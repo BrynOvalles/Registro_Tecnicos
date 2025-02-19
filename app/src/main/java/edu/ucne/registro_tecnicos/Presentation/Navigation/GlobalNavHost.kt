@@ -11,6 +11,8 @@ import edu.ucne.registro_tecnicos.Presentation.Tecnico.TecnicosListScreen
 import edu.ucne.registro_tecnicos.Presentation.Tecnico.TecnicosScreen
 import edu.ucne.registro_tecnicos.Presentation.Ticket.TicketsListScreen
 import edu.ucne.registro_tecnicos.Presentation.Ticket.TicketsScreen
+import edu.ucne.registrotecnicos.presentation.prioridades.PrioridadListScreen
+import edu.ucne.registrotecnicos.presentation.prioridades.PrioridadScreen
 
 @Composable
 fun GlobalNavHost(
@@ -69,6 +71,9 @@ fun GlobalNavHost(
                 },
                 goTicketsList = {
                     navHostController.navigate(Screen.TicketsList)
+                },
+                goPrioridadList = {
+                    navHostController.navigate(Screen.PrioridadList)
                 }
             )
         }
@@ -83,6 +88,20 @@ fun GlobalNavHost(
                 },
                 tecnicoId = it.toRoute<Screen.Mensajes>().tecnicoId,
                 ticketId = it.toRoute<Screen.Mensajes>().ticketId
+            )
+        }
+
+        composable<Screen.PrioridadList> {
+            PrioridadListScreen(
+                createPrioridad = { navHostController.navigate(Screen.Prioridad(0)) },
+                goToPrioridad = { navHostController.navigate(Screen.Prioridad(it)) }
+            )
+        }
+        composable<Screen.Prioridad> {
+            val prioridadId = it.toRoute<Screen.Prioridad>().prioridadId
+            PrioridadScreen(
+                prioridadId = prioridadId,
+                goPrioridadList = { navHostController.navigateUp() }
             )
         }
 }
