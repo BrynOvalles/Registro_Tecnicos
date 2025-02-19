@@ -10,18 +10,18 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface PrioridadingApi {
-    @GET("api/Prioridades")
+    @GET("api/Prioridad")
     suspend fun getPrioridades(): List<PrioridadDto>
 
-    @GET("api/Prioridades/{id}")
+    @GET("api/Prioridad/{id}")
     suspend fun getPrioridad(@Path("id") id: Int): PrioridadDto
 
-    @POST("api/Prioridades")
+    @POST("api/Prioridad")
     suspend fun savePrioridad(@Body prioridadDto: PrioridadDto): Response<PrioridadDto>
 
-    @PUT("api/Prioridades/{id}")
+    @PUT("api/Prioridad/{id}")
     suspend fun updatePrioridad(@Path("id") id: Int, @Body prioridadDto: PrioridadDto): Response<PrioridadDto>
 
-    @DELETE("api/Prioridades/{id}")
+    @DELETE("api/Prioridad/{id}")
     suspend fun deletePrioridad(@Path("id") id: Int): Response<Unit>
 }
