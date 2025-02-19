@@ -15,4 +15,8 @@ sealed class Screen {
     data object Login : Screen()
     @Serializable
     data class Mensajes(val tecnicoId: Int, val ticketId: Int) : Screen()
+    @Serializable
+    data object PrioridadList : Screen()
+    @Serializable
+    data class Prioridad(val prioridadId: Int) : Screen()
 }
